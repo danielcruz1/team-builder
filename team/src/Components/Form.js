@@ -5,7 +5,7 @@ function Form({ teamMemberInfo, handleChange, handleSubmit, renderMemberInfo}) {
 
     return (
 
-      
+        <section className='form'>
             <form onSubmit={event => handleSubmit(event)}>
                 <label>
                     <br />
@@ -34,10 +34,13 @@ function Form({ teamMemberInfo, handleChange, handleSubmit, renderMemberInfo}) {
                     />
                 </label>
 
-      
+                <button onClick={renderMemberInfo}>Add Team Member</button>
+                
+            </form>
 
         </section>   
                                         
     )
 }
 
+export default Form;

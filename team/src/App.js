@@ -1,32 +1,47 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
+import Form from '../src/Components/Form';
 import './App.css';
 
 function App() {
 
-  const [teamMemeberInfo, setTeamMemberInfo] = useState({
+  const [teamMemberInfo, setTeamMemberInfo] = useState({
     name: '',
-    email:'',
-    role:'',
+    email: '',
+    role: '',
   });
 
+  const [team, setTeam] = useState([]);
+
+  function handleChange(event) {
+    setTeamMemberInfo({ ...teamMemberInfo, [event.target.name]: event.target.value });
+  }
+ 
+  function handleSubmit(event) {
+    event.preventDefault();
+    setTeamMemberInfo({ name:'', email:'', role: ''});
+  }
+
+  function renderMemberInfo(e) {
+      setTeam([...team, teamMemberInfo]);
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Add A Member</h1>
+      <Form
+        team={team}
+        teamMemberInfo={teamMemberInfo}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        renderMemberInfo={renderMemberInfo}
+      />
+      {team.map((member, index) => (
+        <section className="member-card" key={index}>
+          <h1>{member.name}</h1>
+          <h1>{member.email}</h1>
+          <h1>{member.role}</h1>
+        </section>
+      ))}
     </div>
   );
 }
